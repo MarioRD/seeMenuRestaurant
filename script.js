@@ -8,7 +8,13 @@ let objectDetected = false;
 document.getElementById('startButton').addEventListener('click', async () => {
     console.log('Botón presionado');
     document.getElementById('startButton').style.display = 'none';
+    document.getElementById('closeButton').style.display = 'block';
     startCamera();
+});
+
+document.getElementById('closeButton').addEventListener('click', async () => {
+    console.log('Cerrando cámara');
+    stopCamera();
 });
 
 function startCamera() {
@@ -28,8 +34,23 @@ function startCamera() {
     setupThreeJS();
 }
 
-function draw() {
+function stopCamera() {
+    console.log('Deteniendo cámara');
     if (video) {
+        video.stop();
+        video.remove();
+    }
+    if (canvas) {
+        canvas.remove();
+    }
+    document.getElementById('closeButton').style.display = 'none';
+    document.getElementById('message').style.display = 'none';
+    document.getElementById('startButton').style.display = 'block';
+    objectDetected = false;
+}
+
+function draw() {
+    if (video && video.loadedmetadata) {
         background(220);
         image(video, 0, 0, windowWidth, windowHeight);
         console.log('Dibujando video');
