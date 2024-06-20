@@ -6,11 +6,13 @@ let cube;
 let objectDetected = false;
 
 document.getElementById('startButton').addEventListener('click', async () => {
+    console.log('Botón presionado');
     document.getElementById('startButton').style.display = 'none';
     startCamera();
 });
 
 function startCamera() {
+    console.log('Iniciando cámara');
     // Crear canvas p5.js
     canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('canvas-container');
@@ -19,6 +21,7 @@ function startCamera() {
     video.hide();
 
     // Configurar detección de formas
+    console.log('Configurando detector');
     detector = ml5.objectDetector('cocossd', modelReady);
 
     // Configurar three.js
@@ -29,15 +32,18 @@ function draw() {
     if (video) {
         background(220);
         image(video, 0, 0, windowWidth, windowHeight);
+        console.log('Dibujando video');
 
         // Mostrar objeto 3D si se detecta la forma
         if (objectDetected) {
+            console.log('Objeto detectado');
             show3DObject();
         }
     }
 }
 
 function setupThreeJS() {
+    console.log('Configurando three.js');
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -68,6 +74,7 @@ function animate() {
 }
 
 function show3DObject() {
+    console.log('Mostrando objeto 3D');
     cube.visible = true;
 }
 
@@ -77,6 +84,7 @@ function modelReady() {
 }
 
 function detect() {
+    console.log('Detectando objetos');
     detector.detect(video, function (err, results) {
         if (err) {
             console.error(err);
@@ -85,6 +93,7 @@ function detect() {
 
         // Procesar resultados
         for (let result of results) {
+            console.log('Objeto detectado:', result.label);
             if (result.label === 'person') { // Aquí puedes cambiar por la etiqueta de la forma que estás buscando
                 objectDetected = true;
             }
