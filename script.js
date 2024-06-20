@@ -4,20 +4,17 @@ let scene, camera, renderer;
 let cube;
 let objectDetected = false;
 
-document.getElementById('startButton').addEventListener('click', async () => {
-    console.log('Botón presionado');
+document.getElementById('startButton').addEventListener('click', () => {
     document.getElementById('startButton').style.display = 'none';
     document.getElementById('closeButton').style.display = 'block';
     startCamera();
 });
 
-document.getElementById('closeButton').addEventListener('click', async () => {
-    console.log('Cerrando cámara');
+document.getElementById('closeButton').addEventListener('click', () => {
     stopCamera();
 });
 
 function startCamera() {
-    console.log('Iniciando cámara');
     // Crear canvas p5.js
     canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('canvas-container');
@@ -30,7 +27,6 @@ function startCamera() {
 }
 
 function stopCamera() {
-    console.log('Deteniendo cámara');
     if (video) {
         video.stop();
         video.remove();
@@ -48,7 +44,6 @@ function draw() {
     if (video && video.loadedmetadata) {
         background(220);
         image(video, 0, 0, windowWidth, windowHeight);
-        console.log('Dibujando video');
 
         detectM();
     }
@@ -66,10 +61,10 @@ function detectM() {
             let g = pixels[index + 1];
             let b = pixels[index + 2];
 
-            // A simple threshold to detect bright areas, you might need to adjust this
+            // Umbral para detectar áreas brillantes
             if (r > 200 && g > 200 && b > 200) {
                 totalPixels++;
-                // Check for a pattern that resembles an "M"
+                // Verificar si el patrón se asemeja a una "M"
                 if (isMShape(x, y)) {
                     matchedPixels++;
                 }
@@ -77,7 +72,7 @@ function detectM() {
         }
     }
 
-    // A simple threshold to decide if an "M" shape has been detected
+    // Umbral para decidir si se ha detectado una "M"
     if (matchedPixels / totalPixels > 0.01) {
         objectDetected = true;
         document.getElementById('message').style.display = 'block';
@@ -86,13 +81,11 @@ function detectM() {
 }
 
 function isMShape(x, y) {
-    // Implement a simple check for the pattern of an "M"
-    // This is a placeholder function and needs to be adjusted for better accuracy
-    return true; // Placeholder logic
+    // Implementar una verificación simple para el patrón de una "M"
+    return true; // Lógica de marcador de posición
 }
 
 function setupThreeJS() {
-    console.log('Configurando three.js');
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -123,6 +116,5 @@ function animate() {
 }
 
 function show3DObject() {
-    console.log('Mostrando objeto 3D');
     cube.visible = true;
 }
