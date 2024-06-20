@@ -76,6 +76,7 @@ function animate() {
 function show3DObject() {
     console.log('Mostrando objeto 3D');
     cube.visible = true;
+    document.getElementById('message').style.display = 'block';
 }
 
 function modelReady() {
@@ -94,8 +95,9 @@ function detect() {
         // Procesar resultados
         for (let result of results) {
             console.log('Objeto detectado:', result.label);
-            if (result.label === 'person') { // Aquí puedes cambiar por la etiqueta de la forma que estás buscando
+            if (result.label === 'M') { // Aquí puedes cambiar por la etiqueta de la forma que estás buscando
                 objectDetected = true;
+                document.getElementById('message').style.display = 'block';
             }
         }
 
