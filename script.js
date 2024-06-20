@@ -5,11 +5,16 @@ let scene, camera, renderer;
 let cube;
 let objectDetected = false;
 
-function setup() {
+document.getElementById('startButton').addEventListener('click', async () => {
+    document.getElementById('startButton').style.display = 'none';
+    startCamera();
+});
+
+function startCamera() {
     // Crear canvas p5.js
     canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('canvas-container');
-    video = createCapture(VIDEO);
+    video = createCapture({ video: { facingMode: { exact: 'environment' } } });
     video.size(windowWidth, windowHeight);
     video.hide();
 
@@ -21,12 +26,14 @@ function setup() {
 }
 
 function draw() {
-    background(220);
-    image(video, 0, 0, windowWidth, windowHeight);
+    if (video) {
+        background(220);
+        image(video, 0, 0, windowWidth, windowHeight);
 
-    // Mostrar objeto 3D si se detecta la forma
-    if (objectDetected) {
-        show3DObject();
+        // Mostrar objeto 3D si se detecta la forma
+        if (objectDetected) {
+            show3DObject();
+        }
     }
 }
 
