@@ -1,6 +1,5 @@
 let video;
 let canvas;
-let detector;
 let scene, camera, renderer;
 let cube;
 let objectDetected = false;
@@ -25,10 +24,6 @@ function startCamera() {
     video = createCapture({ video: { facingMode: { exact: 'environment' } } });
     video.size(windowWidth, windowHeight);
     video.hide();
-
-    // Configurar detección de formas
-    console.log('Configurando detector');
-    detector = ml5.objectDetector('cocossd', modelReady);
 
     // Configurar three.js
     setupThreeJS();
@@ -55,12 +50,45 @@ function draw() {
         image(video, 0, 0, windowWidth, windowHeight);
         console.log('Dibujando video');
 
-        // Mostrar objeto 3D si se detecta la forma
-        if (objectDetected) {
-            console.log('Objeto detectado');
-            show3DObject();
+        detectM();
+    }
+}
+
+function detectM() {
+    loadPixels();
+    let totalPixels = 0;
+    let matchedPixels = 0;
+
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            let index = (x + y * width) * 4;
+            let r = pixels[index];
+            let g = pixels[index + 1];
+            let b = pixels[index + 2];
+
+            // A simple threshold to detect bright areas, you might need to adjust this
+            if (r > 200 && g > 200 && b > 200) {
+                totalPixels++;
+                // Check for a pattern that resembles an "M"
+                if (isMShape(x, y)) {
+                    matchedPixels++;
+                }
+            }
         }
     }
+
+    // A simple threshold to decide if an "M" shape has been detected
+    if (matchedPixels / totalPixels > 0.01) {
+        objectDetected = true;
+        document.getElementById('message').style.display = 'block';
+        show3DObject();
+    }
+}
+
+function isMShape(x, y) {
+    // Implement a simple check for the pattern of an "M"
+    // This is a placeholder function and needs to be adjusted for better accuracy
+    return true; // Placeholder logic
 }
 
 function setupThreeJS() {
@@ -97,32 +125,4 @@ function animate() {
 function show3DObject() {
     console.log('Mostrando objeto 3D');
     cube.visible = true;
-    document.getElementById('message').style.display = 'block';
-}
-
-function modelReady() {
-    console.log('Modelo listo');
-    detect();
-}
-
-function detect() {
-    console.log('Detectando objetos');
-    detector.detect(video, function (err, results) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-
-        // Procesar resultados
-        for (let result of results) {
-            console.log('Objeto detectado:', result.label);
-            if (result.label === 'M') { // Aquí puedes cambiar por la etiqueta de la forma que estás buscando
-                objectDetected = true;
-                document.getElementById('message').style.display = 'block';
-            }
-        }
-
-        // Continuar detección
-        detect();
-    });
 }
