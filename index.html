@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detección de M y Renderizado 3D</title>
     <style>
-        body { margin: 0; overflow: hidden; }
+        body { margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; }
         #canvas-container { position: absolute; top: 0; left: 0; }
         #three-container { position: absolute; top: 0; left: 0; z-index: 10; }
+        #startButton { z-index: 20; padding: 10px 20px; font-size: 16px; }
     </style>
 </head>
 <body>
+    <button id="startButton">Iniciar Cámara</button>
     <div id="canvas-container"></div>
     <div id="three-container"></div>
 
@@ -24,3 +26,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
