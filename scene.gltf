@@ -91,12 +91,12 @@
   "buffers": [
     {
       "byteLength": 5192,
-      "uri": "https://github.com/MarioRD/seeMenuRestaurant/raw/main/scene.bin"
+      "uri": "https://raw.githubusercontent.com/MarioRD/seeMenuRestaurant/main/scene.bin"
     }
   ],
   "images": [
     {
-      "uri": "https://github.com/MarioRD/seeMenuRestaurant/blob/fef830b80bde7a41c31708bad93a45a78ebb7292/textures/apple_baseColor.png?raw=true"
+      "uri": "https://raw.githubusercontent.com/MarioRD/seeMenuRestaurant/main/textures/apple_baseColor.png"
     }
   ],
   "materials": [
