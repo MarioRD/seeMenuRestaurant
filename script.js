@@ -12,6 +12,7 @@ function startCamera() {
     console.log('Iniciando cámara');
     document.getElementById('arScene').style.display = 'block';
 
+    // Configurar la detección de marcadores
     const marker = document.getElementById('marker');
     marker.addEventListener('markerFound', () => {
         console.log('Marcador detectado');
@@ -38,9 +39,9 @@ let animationFrame;
 
 function startAnimation() {
     const model = document.getElementById('animatedModel');
+    model.object3D.scale.set(0.05, 0.05, 0.05); // Ajustar escala dinámicamente
     const animate = () => {
-        model.object3D.rotation.x += 0.01;
-        model.object3D.rotation.y += 0.01;
+        model.object3D.rotation.x += 0.01; // Solo rotar en el eje X
         animationFrame = requestAnimationFrame(animate);
     };
     animate();
