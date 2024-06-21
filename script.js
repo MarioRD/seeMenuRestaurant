@@ -39,12 +39,12 @@ let animationFrame;
 let hue = 0;
 
 function startAnimation() {
-    const box = document.getElementById('animatedBox');
+    const sphere = document.getElementById('animatedSphere');
     const animate = () => {
         hue = (hue + 1) % 360;
-        box.setAttribute('color', `hsl(${hue}, 100%, 50%)`);
-        box.object3D.rotation.x += 0.01;
-        box.object3D.rotation.y += 0.01;
+        sphere.setAttribute('color', `hsl(${hue}, 100%, 50%)`);
+        sphere.object3D.rotation.x += 0.01;
+        sphere.object3D.rotation.y += 0.01;
         animationFrame = requestAnimationFrame(animate);
     };
     animate();
