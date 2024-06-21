@@ -20,14 +20,8 @@
     <a-scene embedded arjs id="arScene" style="display: none;">
         <!-- Sustituye la URL por la URL directa de tu archivo .patt en GitHub -->
         <a-marker type="pattern" url="https://raw.githubusercontent.com/MarioRD/seeMenuRestaurant/main/pattern.patt" id="marker">
-            <!-- Ajusta la escala y rotación del modelo 3D con los atributos scale y rotation -->
-            <a-gltf-model 
-                src="https://raw.githubusercontent.com/MarioRD/seeMenuRestaurant/main/scene.gltf" 
-                scale="0.05 0.05 0.05" 
-                rotation="90 0 0" 
-                position="0 0 0" 
-                id="animatedModel">
-            </a-gltf-model>
+            <!-- Ajusta la escala del modelo 3D con el atributo scale -->
+            <a-gltf-model src="https://raw.githubusercontent.com/MarioRD/seeMenuRestaurant/main/scene.gltf" scale="0.05 0.05 0.05" id="animatedModel"></a-gltf-model>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
