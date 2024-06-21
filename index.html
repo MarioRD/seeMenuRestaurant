@@ -18,9 +18,7 @@
     <button id="closeButton">X</button>
     <div id="message">Se ha detectado la forma</div>
     <a-scene embedded arjs id="arScene" style="display: none;">
-        <!-- Sustituye la URL por la URL directa de tu archivo .patt en GitHub -->
         <a-marker type="pattern" url="https://raw.githubusercontent.com/MarioRD/seeMenuRestaurant/main/pattern.patt" id="marker">
-            <!-- Sustituye la URL del modelo 3D por una accesible públicamente -->
             <a-gltf-model src="https://raw.githubusercontent.com/MarioRD/seeMenuRestaurant/main/apple.gltf" scale="0.1 0.1 0.1" id="animatedModel"></a-gltf-model>
         </a-marker>
         <a-entity camera></a-entity>
