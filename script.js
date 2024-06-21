@@ -17,10 +17,12 @@ function startCamera() {
     marker.addEventListener('markerFound', () => {
         console.log('Marcador detectado');
         document.getElementById('message').style.display = 'block';
+        startAnimation();
     });
     marker.addEventListener('markerLost', () => {
         console.log('Marcador perdido');
         document.getElementById('message').style.display = 'none';
+        stopAnimation();
     });
 }
 
@@ -30,4 +32,24 @@ function stopCamera() {
     document.getElementById('closeButton').style.display = 'none';
     document.getElementById('message').style.display = 'none';
     document.getElementById('startButton').style.display = 'block';
+    stopAnimation();
+}
+
+let animationFrame;
+let hue = 0;
+
+function startAnimation() {
+    const box = document.getElementById('animatedBox');
+    const animate = () => {
+        hue = (hue + 1) % 360;
+        box.setAttribute('material', 'color', `hsl(${hue}, 100%, 50%)`);
+        box.object3D.rotation.x += 0.01;
+        box.object3D.rotation.y += 0.01;
+        animationFrame = requestAnimationFrame(animate);
+    };
+    animate();
+}
+
+function stopAnimation() {
+    cancelAnimationFrame(animationFrame);
 }
