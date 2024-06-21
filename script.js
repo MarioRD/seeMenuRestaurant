@@ -42,7 +42,7 @@ function startAnimation() {
     const box = document.getElementById('animatedBox');
     const animate = () => {
         hue = (hue + 1) % 360;
-        box.setAttribute('material', 'color', `hsl(${hue}, 100%, 50%)`);
+        box.setAttribute('color', `hsl(${hue}, 100%, 50%)`);
         box.object3D.rotation.x += 0.01;
         box.object3D.rotation.y += 0.01;
         animationFrame = requestAnimationFrame(animate);
