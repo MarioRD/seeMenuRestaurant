@@ -39,8 +39,10 @@ let animationFrame;
 
 function startAnimation() {
     const model = document.getElementById('animatedModel');
+    model.object3D.scale.set(0.05, 0.05, 0.05); // Ajustar escala dinámicamente
+    model.object3D.rotation.set(Math.PI / 2, 0, 0); // Ajustar rotación dinámicamente
     const animate = () => {
-        model.object3D.rotation.y += 0.005; // Solo rotar en el eje X
+        model.object3D.rotation.x += 0.01; // Solo rotar en el eje X
         animationFrame = requestAnimationFrame(animate);
     };
     animate();
