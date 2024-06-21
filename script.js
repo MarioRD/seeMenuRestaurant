@@ -12,7 +12,6 @@ function startCamera() {
     console.log('Iniciando cámara');
     document.getElementById('arScene').style.display = 'block';
 
-    // Configurar la detección de marcadores
     const marker = document.getElementById('marker');
     marker.addEventListener('markerFound', () => {
         console.log('Marcador detectado');
